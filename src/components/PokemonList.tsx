@@ -17,7 +17,7 @@ export interface DataPokemon {
 const PokemonList = ({ pokemons }: PokemonListProps) => {
   return (
     <div className='PokemonList'>
-      {pokemons.map((pokemon, idx) => {
+      {!!pokemons && pokemons.map((pokemon: any, idx: number) => {
         return <PokemonCard key={idx} pokemon={pokemon} />;
       })}
     </div>

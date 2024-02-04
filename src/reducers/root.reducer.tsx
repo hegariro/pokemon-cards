@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import { pokemonsReducer } from "./pokemons";
+import { pokemonReducers } from "../features/data.slice";
 
 const rootReducer = combineReducers({
-    data: pokemonsReducer,
+    data: pokemonReducers,
     // se agregan los demás reducer
 });
 

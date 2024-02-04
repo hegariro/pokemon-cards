@@ -1,9 +1,9 @@
-import Meta from 'antd/lib/card/Meta';
+import { useDispatch } from 'react-redux';
 import { Card } from 'antd';
+import Meta from 'antd/lib/card/Meta';
 import { DataPokemon } from './PokemonList';
 import { StarButton } from './StarButton';
-import { useDispatch } from 'react-redux';
-import { setFavorite } from '../actions';
+import { setFavorite } from '../features/data.slice';
 import './PokemonList.css';
 
 interface PokemonCardProps {
@@ -12,26 +12,27 @@ interface PokemonCardProps {
 
 const PokemonCard = ({ pokemon }: PokemonCardProps) => {
     const dispatch = useDispatch();
-    const {
-      id,
-      abilities,
-      name,
-      favorite,
-      sprites: { front_default },
-      types
-    } = pokemon;
-    const abilitiesText = abilities
-      .map((item: any) => (item?.ability?.name || ''))
-      .join(', ');
-    const tyesText = types
-      .map((item:any) => (item?.type?.name || ''))
-      .join(', ');
-    const handleOnFavorite = (pokemonId: any) => {
-      console.debug({ pokemonId });
-      dispatch(setFavorite({ pokemonId }));
+    const handleOnFavorite = (pokemonId: number) => {
+      dispatch(setFavorite<any>({ pokemonId }));
     };
 
     try {
+        const {
+          id,
+          abilities,
+          name,
+          favorite,
+          sprites: { front_default },
+          types
+        } = pokemon;
+
+        const abilitiesText = abilities
+          .map((item: any) => (item?.ability?.name || ''))
+          .join(', ');
+        const tyesText = types
+          .map((item:any) => (item?.type?.name || ''))
+          .join(', ');
+
         return (
           <Card
             title={name}
